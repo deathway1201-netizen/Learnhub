@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnHub – Global Learning</title>
+<style>
+body,html{margin:0;padding:0;width:100%;height:100%;font-family:Arial,sans-serif;background:#121212;color:#eee;overflow-x:hidden;}
+#introScreen{position:fixed;width:100%;height:100%;background:radial-gradient(circle at top,#0a0a0a 0%,#121212 100%);display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:9999;}
+#sword{width:40px;height:150px;background:linear-gradient(to bottom,silver,gray);border:2px solid #ccc;border-radius:5px;position:relative;top:-300px;box-shadow:0 0 20px #fff;transform-origin:top center;animation:dropSword 1s ease-in forwards;}
+#fire{width:80px;height:40px;background:radial-gradient(circle,orange,red,transparent);border-radius:50%;opacity:0;position:absolute;bottom:220px;}
+@keyframes dropSword{0%{top:-300px;transform:rotate(-10deg);}80%{top:200px;transform:rotate(10deg);}100%{top:220px;transform:rotate(0deg);}}
+@keyframes firePop{0%{transform:scale(0);opacity:1;}50%{transform:scale(1.5);opacity:0.8;}100%{transform:scale(2);opacity:0;}}
+#mainContent{display:none;}
+header{text-align:center;padding:2rem;background:#1e1e1e;}
+h1{margin:0;color:#00e6a8;}
+nav{margin-top:1rem;}
+.tablink{background:#333;color:#eee;border:none;padding:10px 20px;margin:0 5px;cursor:pointer;transition:background 0.3s;border-radius:6px;}
+.tablink:hover,.tablink.active{background:#00e6a8;color:#000;}
+main{max-width:800px;margin:2rem auto;padding:0 1rem;}
+.tabcontent{animation:fadeIn 0.4s;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+footer{text-align:center;padding:1rem;background:#1e1e1e;margin-top:2rem;}
+a{color:#00e6a8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+.credits{margin-top:2rem;font-size:0.9rem;background:#1a1a1a;padding:1rem;border-radius:8px;line-height:1.4;opacity:1;transition:opacity 1s ease;}
+.credits.hide{opacity:0;}
+#welcomeBox{position:relative;background:#222;border:2px solid #00e6a8;border-radius:10px;padding:1rem 1.5rem;margin-bottom:2rem;animation:fadeIn 0.5s;}
+#welcomeBox button{position:absolute;top:5px;right:10px;background:transparent;color:#00e6a8;border:none;font-size:1.2rem;cursor:pointer;}
+#welcomeBox.hide{display:none;}
+#dayCalcContent,#modesContent{text-align:left;}
+#todayDate{margin-bottom:1rem;font-weight:bold;}
+#ownerPanel{display:none;background:#222;color:#0f0;padding:1rem;border:2px solid #0f0;margin:1rem 0;border-radius:10px;}
+</style>
+</head>
+<body>
+<div id="introScreen"><div id="sword"></div><div id="fire"></div></div>
+
+<div id="mainContent">
+<header>
+<h1>🚀 LearnHub</h1>
+<p>Learn Game Development, Coding, Web Design, Devices & OS</p>
+<nav>
+<button class="tablink active" onclick="openTab(event,'games')">🎮 Game Dev</button>
+<button class="tablink" onclick="openTab(event,'coding')">💻 Coding</button>
+<button class="tablink" onclick="openTab(event,'web')">🌐 Web Design</button>
+<button class="tablink" onclick="openTab(event,'devices')">🖥 Devices & OS</button>
+<button class="tablink" onclick="openTab(event,'dayCalc')">📅 Day Calculator</button>
+<button class="tablink" onclick="openTab(event,'modes')">⚡ Modes</button>
+</nav>
+</header>
+
+<main>
+<div id="welcomeBox"><button onclick="closeWelcome()">✖</button><h2>Welcome to LearnHub!</h2><p>This is your <strong>all-in-one free global learning hub</strong>. Explore, track your learning, and challenge your memory worldwide!</p></div>
+
+<section id="games" class="tabcontent">
+<h2>🎮 Game Development</h2>
+<ul>
+<li><a href="https://unity.com/learn" target="_blank">Unity Learn</a></li>
+<li><a href="https://godotengine.org/learn" target="_blank">Godot Tutorials</a></li>
+<li><a href="https://learn.unrealengine.com/" target="_blank">Unreal Engine Courses</a></li>
+<li>Practice: Start with a simple 2D platformer or clicker game.</li>
+</ul>
+</section>
+
+<section id="coding" class="tabcontent" style="display:none">
+<h2>💻 Coding (JavaScript & Python)</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide" target="_blank">JS Guide (MDN)</a></li>
+<li><a href="https://www.python.org/about/gettingstarted/" target="_blank">Python Getting Started</a></li>
+<li><a href="https://www.freecodecamp.org/learn" target="_blank">FreeCodeCamp</a></li>
+<li>Tip: Build small projects – calculator, todo app, simple scripts.</li>
+</ul>
+</section>
+
+<section id="web" class="tabcontent" style="display:none">
+<h2>🌐 Web Design (HTML & CSS)</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML" target="_blank">Learn HTML (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS" target="_blank">Learn CSS (MDN)</a></li>
+<li><a href="https://www.w3schools.com/html/" target="_blank">W3Schools HTML & CSS Exercises</a></li>
+<li><a href="https://www.freecodecamp.org/learn/responsive-web-design/" target="_blank">FreeCodeCamp Projects</a></li>
+<li>Practice: Build a portfolio site, landing page, or blog.</li>
+</ul>
+</section>
+
+<section id="devices" class="tabcontent" style="display:none">
+<h2>🖥 Devices & Operating Systems</h2>
+<ul>
+<li><strong>Windows:</strong> <a href="https://support.microsoft.com/en-us/windows" target="_blank">Official Windows Guide</a></li>
+<li><strong>Linux:</strong> <a href="https://linuxjourney.com/" target="_blank">Linux Journey</a></li>
+<li><strong>macOS:</strong> <a href="https://support.apple.com/macos" target="_blank">Apple Support</a></li>
+<li><strong>Mobile Devices:</strong> <a href="https://www.android.com/" target="_blank">Android</a>, <a href="https://www.apple.com/ios/" target="_blank">iOS</a></li>
+</ul>
+</section>
+
+<section id="dayCalc" class="tabcontent" style="display:none">
+<h2>📅 Day Calculator</h2>
+<div id="todayDate"></div>
+<div id="dayCalcContent"></div>
+<button onclick="resetDay()">Restart Day Tracker</button>
+</section>
+
+<section id="modes" class="tabcontent" style="display:none">
+<h2>⚡ Modes</h2>
+<p>Select memory mode:</p>
+<button onclick="setMode('strong')">Strong Memory</button>
+<button onclick="window.location.href='weak_memory.html'">Weak Memory</button>
+<div id="modesContent"></div>
+</section>
+
+<!-- OWNER PANEL -->
+<div id="ownerPanel">
+<h3>Owner Panel</h3>
+<button onclick="resetAllData()">Reset All User Data</button>
+<button onclick="giveBonus()">Give Learning Bonus</button>
+<p>Welcome, Owner! Only you can see this panel.</p>
+</div>
+
+<div class="credits" id="credits"><strong>Credits & Sources:</strong><br>All linked resources, logos and content belong to their respective owners.</div>
+</main>
+<footer>
+<p>🌟 Powered by curiosity & code</p>
+<button onclick="openOwnerPanel()" style="background:#000;color:#0f0;padding:5px;border-radius:5px;margin-top:10px;">Owner</button>
+</footer>
+
+<script>
+// TAB FUNCTION
+function openTab(evt, tabName){
+  const t=document.getElementsByClassName("tabcontent");
+  const b=document.getElementsByClassName("tablink");
+  for(let i=0;i<t.length;i++) t[i].style.display="none";
+  for(let i=0;i<b.length;i++) b[i].classList.remove("active");
+  document.getElementById(tabName).style.display="block";
+  evt.currentTarget.classList.add("active");
+}
+
+// WELCOME CLOSE
+function closeWelcome(){document.getElementById("welcomeBox").classList.add("hide");}
+
+// MODES
+function setMode(mode){
+  localStorage.setItem("learnHubMode",mode);
+  if(mode==="weak"){
+    document.getElementById("modesContent").innerHTML="Weak memory mode activated. Redirecting to simplified page.";
+    setTimeout(()=>{window.location.href='weak_memory.html';},500);
+  }else{
+    document.getElementById("modesContent").innerHTML="Strong memory mode: Full LearnHub content remains active.";
+  }
+}
+
+// DAY CALCULATOR
+function updateDayCalc(){
+  const now=new Date();
+  const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const today=new Date().toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric',timeZone:tz});
+  document.getElementById("todayDate").innerText="Today: "+today;
+  let lastVisit=localStorage.getItem("learnHubLastVisitUTC");
+  let dayCount=parseInt(localStorage.getItem("learnHubDay")||"1");
+  const nowUTC=Date.now();
+  if(lastVisit){
+    const diff=Math.floor((nowUTC-lastVisit)/(1000*60*60*24));
+    if(diff>1){alert("You skipped a day! Tracker reset.");dayCount=1;}
+    if(diff>0) dayCount+=1;
+  }
+  localStorage.setItem("learnHubDay",dayCount);
+  localStorage.setItem("learnHubLastVisitUTC",nowUTC);
+  let content="<ul>";
+  for(let i=1;i<=dayCount;i++){
+    content+="<li>Day "+i+": ";
+    switch(i%7){
+      case 1: content+="HTML basics"; break;
+      case 2: content+="CSS basics"; break;
+      case 3: content+="JavaScript basics"; break;
+      case 4: content+="Python basics"; break;
+      case 5: content+="Simple Game Dev intro"; break;
+      case 6: content+="Responsive Web Design"; break;
+      case 0: content+="Devices & OS basics"; break;
+    }
+    content+="</li>";
+  }
+  content+="</ul>";
+  document.getElementById("dayCalcContent").innerHTML=content;
+}
+function resetDay(){
+  if(confirm("Restart your tracker?")){localStorage.removeItem("learnHubDay");localStorage.removeItem("learnHubLastVisitUTC");updateDayCalc();}
+}
+
+// OWNER PANEL FIXED
+let ownerVerified = localStorage.getItem("ownerVerified") === "true";
+
+function openOwnerPanel() {
+  if(ownerVerified){toggleOwnerPanel(); return;}
+  const email = prompt("Enter your owner email:");
+  const pass = prompt("Enter your owner password:");
+  if(email === "deathway1201@gmail.com" && pass === "IloveYes"){
+    ownerVerified = true;
+    localStorage.setItem("ownerVerified","true");
+    document.getElementById("ownerPanel").style.display = "block";
+    alert("Owner access granted!");
+  } else { alert("Access Denied!"); }
+}
+
+function toggleOwnerPanel(){
+  const panel = document.getElementById("ownerPanel");
+  panel.style.display = (panel.style.display==="block") ? "none":"block";
+}
+
+// Optional close button inside owner panel
+document.getElementById("ownerPanel")?.insertAdjacentHTML('beforeend','<button onclick="toggleOwnerPanel()" style="margin-top:10px;">Close Panel</button>');
+
+function resetAllData(){if(confirm("Reset all LearnHub progress?")){localStorage.clear();alert("All user data reset!");location.reload();}}
+function giveBonus(){let day=parseInt(localStorage.getItem("learnHubDay")||"1");day+=1;localStorage.setItem("learnHubDay",day);alert("Bonus day added!");updateDayCalc();}
+
+// CREDITS AUTO-HIDE
+setTimeout(()=>{document.getElementById("credits").classList.add("hide");},5000);
+
+// INTRO SWORD ANIMATION
+window.addEventListener('load', () => {
+  const sword = document.getElementById("sword");
+  const fire = document.getElementById("fire");
+
+  // Sword drop animation
+  sword.addEventListener('animationend', () => {
+    // Fire pop effect
+    fire.style.animation = "firePop 0.7s forwards";
+
+    // After animation, hide intro and show main content
+    setTimeout(() => {
+      document.getElementById("introScreen").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+      updateDayCalc();
+    }, 800);
+  });
+
+  // 20-minute usage warning
+  setTimeout(() => {
+    alert("⚠ You have spent 20 minutes on LearnHub! Take a break or restart the tracker.");
+    location.reload();
+  }, 20 * 60 * 1000);
+});
+</script>
+</body>
+</html>
